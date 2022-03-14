@@ -1,0 +1,31 @@
+START ZOOKEEPER   
+sudo service zookeeper start
+
+DELETE KAFKA LOGS   
+sudo rm -r /tmp/kafka-logs
+
+START KAFKA   
+sudo ~/kafka/bin/kafka-server-start.sh ~/kafka/config/server.properties
+
+MICROSERVICES - PORTS
+  General
+    Discovery: 8761
+    Config: 8888
+    Gateway: 8765
+  Specifics
+    Mail: 8082
+    Mediator: 8083
+    Course: 8084
+    Supervisor: 8085
+    Payment: 8086
+    Exam: 8087
+    Mail2: 8088
+    Notification: 8089
+    ------------------
+    Mediator Manager: 8090
+
+
+DESCRIBE A TOPIC:
+  ./kafka-topics.sh  --describe --bootstrap-server localhost:9092 --topic TO_EMAIL_STUDENT
+CHANGE PARTITIONS OF A TOPIC:
+  ./kafka-topics.sh --bootstrap-server localhost:9092 --alter --topic TO_EMAIL_STUDENT --partitions 6
