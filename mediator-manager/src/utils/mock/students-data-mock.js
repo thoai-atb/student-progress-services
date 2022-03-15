@@ -1,4 +1,4 @@
-const { PROGRESS_CATEGORIES } = require("./static-mock");
+const { PROGRESS_CATEGORIES } = require("./metadata-mock");
 
 const TOTAL_STUDENTS = {
   22: 820,

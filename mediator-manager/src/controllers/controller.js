@@ -1,11 +1,12 @@
 "use strict";
 
 const properties = require("../../package.json");
+const { browse, getStudentData } = require("../utils/mock/browse-mock");
 const {
   PROGRESS_CATEGORIES,
   STUDENT_YEARS,
-} = require("../utils/mock/static-mock");
-const { generateStudentsData } = require("../utils/mock/dynamic-mock");
+} = require("../utils/mock/metadata-mock");
+const { generateStudentsData } = require("../utils/mock/students-data-mock");
 
 var controllers = {
   about: (req, res) => {
@@ -34,6 +35,19 @@ var controllers = {
     //   });
     // }
     res.json(data);
+  },
+  getBrowseStudents(req, res) {
+    var progressCategoryId = req.params.progressCategoryId;
+    var studentYearId = req.query.studentYearId;
+    var statusId = req.query.statusId;
+    var data = browse(progressCategoryId, studentYearId, statusId);
+    res.json(data);
+  },
+  getStudentData(req, res) {
+    var studentId = req.params.studentId;
+    var progressCategoryId = req.query.progressCategoryId;
+    var student = getStudentData(studentId, progressCategoryId);
+    res.json(student);
   },
 };
 

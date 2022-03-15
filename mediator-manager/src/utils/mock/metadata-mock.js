@@ -17,15 +17,15 @@ const PROGRESS_CATEGORIES = [
         description: "Students need to take the entry English test.",
       },
       {
-        id: "intensive_english",
-        name: "Intensive English",
-        description: "Students studying intensive English.",
+        id: "ie_ae",
+        name: "IE & AE",
+        description: "Students studying intensive or academic English.",
       },
       {
-        id: "aquiring_credits",
-        name: "Aquiring Credits",
+        id: "acquiring_credits",
+        name: "Acquiring Credits",
         description:
-          "Students who finished intensive English course and accumulating credits to be ready for thesis.",
+          "Students who finished English courses and accumulating credits to be ready for thesis.",
       },
       {
         id: "thesis",
