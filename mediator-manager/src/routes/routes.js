@@ -9,4 +9,5 @@ module.exports = (app) => {
   app.route("/api/students-data/:studentYearId").get(controller.getStudentsData);
   app.route("/api/browse/:progressCategoryId").get(controller.getBrowseStudents);
   app.route("/api/browse/student/:studentId").get(controller.getStudentData);
+  app.route("/api/processors/:progressCategoryId").get(controller.getProcessors);
 };

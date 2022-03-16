@@ -6,6 +6,7 @@ const {
   PROGRESS_CATEGORIES,
   STUDENT_YEARS,
 } = require("../utils/mock/metadata-mock");
+const { getProcessorsByProgressCategory, getAllProcessors } = require("../utils/mock/processors-mock");
 const { generateStudentsData } = require("../utils/mock/students-data-mock");
 
 var controllers = {
@@ -22,18 +23,12 @@ var controllers = {
   getStudentYears(req, res) {
     res.json(STUDENT_YEARS);
   },
-  async getStudentsData(req, res) {
+  getStudentsData(req, res) {
     var data = [];
     var studentYearId = req.params.studentYearId;
     for (const category of PROGRESS_CATEGORIES) {
       data.push(generateStudentsData(category.id, studentYearId));
     }
-    // await sleep(1000);
-    // function sleep(ms) {
-    //   return new Promise((resolve) => {
-    //     setTimeout(resolve, ms);
-    //   });
-    // }
     res.json(data);
   },
   getBrowseStudents(req, res) {
@@ -48,6 +43,11 @@ var controllers = {
     var progressCategoryId = req.query.progressCategoryId;
     var student = getStudentData(studentId, progressCategoryId);
     res.json(student);
+  },
+  getProcessors(req, res) {
+    var progressCategoryId = req.params.progressCategoryId;
+    if (progressCategoryId === "all") res.json(getAllProcessors());
+    else res.json(getProcessorsByProgressCategory(progressCategoryId));
   },
 };
 
