@@ -7,6 +7,13 @@ const TOTAL_STUDENTS = {
   19: 643,
   18: 612,
   17: 634,
+  16: 616,
+  15: 615,
+  14: 614,
+  13: 613,
+  12: 612,
+  11: 611,
+  10: 610,
 };
 
 const generalPercentages = (studentYearId) => {
@@ -25,7 +32,7 @@ const generalPercentages = (studentYearId) => {
     case "17":
       return [0.0, 0.0, 0.0, 0.0, 0.1, 0.1, 0.7];
     default:
-      return [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
+      return [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.95];
   }
 };
 
@@ -45,7 +52,7 @@ const semesterPercentages = (studentYearId) => {
     case "17":
       return [0.0, 0.0, 0.0, 0.0, 0.0, 0.1, 0.8];
     default:
-      return [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
+      return [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.95];
   }
 };
 
@@ -56,7 +63,7 @@ const getPercentages = (progressCategoryId, studentYearId) => {
     case "semester":
       return semesterPercentages(studentYearId);
     default:
-      return [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
+      return [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.95];
   }
 };
 

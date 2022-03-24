@@ -122,9 +122,10 @@ const getAllProcessors = () => {
 };
 
 const getProcessorsByProgressCategory = (progressCategoryId) => {
-  const processors = MEDIATOR_RELATED_PROCESSOR_MAPPING[
-    progressCategoryId
-  ]?.map((id) => PROCESSORS_MOCK.find((p) => p.id === id));
+  const processors = (
+    MEDIATOR_RELATED_PROCESSOR_MAPPING[progressCategoryId] ||
+    MEDIATOR_RELATED_PROCESSOR_MAPPING["semester"]
+  ).map((id) => PROCESSORS_MOCK.find((p) => p.id === id));
   return processors;
 };
 
