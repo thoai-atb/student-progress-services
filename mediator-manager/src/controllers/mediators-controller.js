@@ -1,9 +1,5 @@
 const { MEDIATOR_LIST, MediatorsAPI } = require("../api/mediators-api");
-const {
-  getAllProcessors,
-  getProcessorsByProgressCategory,
-  PROCESSORS_MOCK,
-} = require("../utils/mock/processors-mock");
+const { PROCESSORS_MOCK } = require("../utils/mock/processors-mock");
 const { mapper } = require("./progress-to-mediator-mapper");
 
 const CONNECT_ERROR_MESSAGE = "Could not connect to mediator";
@@ -13,13 +9,12 @@ const MediatorController = {
     const data = [];
     try {
       for (const mediatorId of MEDIATOR_LIST) {
-        const res = await MediatorsAPI.getMetadata(mediatorId);
-        data.push(res.data);
+        const res2 = await MediatorsAPI.getMetadata(mediatorId);
+        data.push(res2.data);
       }
+      res.json(data);
     } catch (error) {
       res.status(500).json({ message: CONNECT_ERROR_MESSAGE });
-    } finally {
-      res.json(data);
     }
   },
   async getStudentDistributions(req, res) {
@@ -27,13 +22,12 @@ const MediatorController = {
     const studentYear = req.params.studentYear;
     try {
       for (const mediatorId of MEDIATOR_LIST) {
-        const res = await MediatorsAPI.getDistribution(mediatorId, studentYear);
-        data.push(res.data);
+        const res2 = await MediatorsAPI.getDistribution(mediatorId, studentYear);
+        data.push(res2.data);
       }
+      res.json(data);
     } catch (error) {
       res.status(500).json({ message: CONNECT_ERROR_MESSAGE });
-    } finally {
-      res.json(data);
     }
   },
   async getStudents(req, res) {
@@ -49,19 +43,18 @@ const MediatorController = {
     var data = {};
     try {
       const mediatorId = mapper(progressCategoryId);
-      const res = await MediatorsAPI.getStudents(mediatorId, {
-        studentYear,
-        status,
-        studentId,
-        studentName,
-        page,
-        size,
+      const res2 = await MediatorsAPI.getStudents(mediatorId, {
+        studentYear: studentYear || "all",
+        status: status || "all",
+        studentId: studentId || undefined,
+        studentName: studentName || undefined,
+        page: page || 1,
+        size: size || 10,
       });
-      data = res.data;
+      data = res2.data;
+      res.json(data);
     } catch (error) {
       res.status(500).json({ message: CONNECT_ERROR_MESSAGE });
-    } finally {
-      res.json(data);
     }
   },
   async getStudent(req, res) {
@@ -70,31 +63,30 @@ const MediatorController = {
     var data = {};
     try {
       const mediatorId = mapper(progressCategoryId);
-      const res = await MediatorsAPI.getStudent(mediatorId, studentId);
-      data = res.data;
-    } catch (error) {
-      res.status(500).json({ message: CONNECT_ERROR_MESSAGE });
-    } finally {
+      const res2 = await MediatorsAPI.getStudent(mediatorId, studentId);
+      data = res2.data;
       res.json(data);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
     }
   },
   async getProcessors(req, res) {
     var progressCategoryId = req.params.progressCategory;
     var data = [];
-    if (progressCategoryId === "all") data = PROCESSORS_MOCK;
-    else {
-      const mediatorId = mapper(progressCategoryId);
-      try {
-        const res = await MediatorsAPI.getProcessors(mediatorId);
-        const list = res.data;
-        data = PROCESSORS_MOCK.filter(
-          (processor) => list.includes(processor.id)
+    try {
+      if (progressCategoryId === "all") data = PROCESSORS_MOCK;
+      else {
+        const mediatorId = mapper(progressCategoryId);
+        const res2 = await MediatorsAPI.getProcessors(mediatorId);
+        const list = res2.data;
+        data = PROCESSORS_MOCK.filter((processor) =>
+          list.includes(processor.id)
         );
-      } catch (error) {
-        res.status(500).json({ message: CONNECT_ERROR_MESSAGE });
       }
+      res.json(data);
+    } catch (error) {
+      res.status(500).json({ message: CONNECT_ERROR_MESSAGE });
     }
-    res.json(data);
   },
 };
 

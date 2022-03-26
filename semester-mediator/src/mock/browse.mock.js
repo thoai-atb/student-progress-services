@@ -2,6 +2,7 @@
 
 const { METADATA } = require("./metadata.mock");
 const { STUDENTS } = require("./student-data.mock");
+const { stringMatch } = require("../utils/string-matcher");
 
 const browse = ({
   studentYear = "all",
@@ -11,7 +12,6 @@ const browse = ({
   page = 1,
   size = 10,
 }) => {
-  const progressCategory = METADATA.id;
   var data = STUDENTS;
 
   // FILTERING
@@ -19,11 +19,7 @@ const browse = ({
     data = data.filter((s) => s.studentYear == studentYear);
   }
   if (status !== "all") {
-    data = data.filter(
-      (s) =>
-        s.progressStatuses.find((status) => status.id === progressCategory)
-          ?.step.id === status
-    );
+    data = data.filter((s) => s.progressStatus?.step.id === status);
   }
   if (studentId) {
     data = data.filter((s) => stringMatch(studentId, s.id));

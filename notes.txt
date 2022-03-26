@@ -23,6 +23,9 @@ MICROSERVICES - PORTS
     Notification: 8089
     ------------------
     Mediator Manager: 8090
+    General Mediator: 8091
+    Semester Mediator: 8092
+    English Mediator: 8093
 
 
 DESCRIBE A TOPIC:

@@ -14,6 +14,13 @@ const PROCESSORS_MOCK = [
     problems: 0,
   },
   {
+    id: "english_mediator",
+    name: "English Mediator",
+    isMediator: true,
+    processors: 4,
+    problems: 0,
+  },
+  {
     id: "student_services",
     name: "Student Services",
     processors: 2,

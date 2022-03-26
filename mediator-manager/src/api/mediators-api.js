@@ -13,15 +13,18 @@ const createAxios = (url) => {
 
 const generalMediatorAxios = createAxios("http://localhost:8091");
 const semesterMediatorAxios = createAxios("http://localhost:8092");
+const englishMediatorAxios = createAxios("http://localhost:8093");
 
 const MEDIATOR_LIST = [
   "general", // general mediator
   "semester", // semester mediator
+  "english", // english mediator
 ];
 
 const mediators = {
   general: generalMediatorAxios,
   semester: semesterMediatorAxios,
+  english: englishMediatorAxios,
 };
 
 const MediatorsAPI = {

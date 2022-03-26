@@ -1,0 +1,47 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "start all",
+      "dependsOn": [
+        "manager",
+        "general",
+        "semester",
+        "english",
+      ],
+      "problemMatcher": []
+    },
+    {
+      "type": "npm",
+      "script": "dev",
+      "path": "mediator-manager/",
+      "problemMatcher": [],
+      "label": "manager",
+      "isBackground": true
+    },
+    {
+      "type": "npm",
+      "script": "dev",
+      "path": "general-mediator/",
+      "problemMatcher": [],
+      "label": "general",
+      "isBackground": true
+    },
+    {
+      "type": "npm",
+      "script": "dev",
+      "path": "semester-mediator/",
+      "problemMatcher": [],
+      "label": "semester",
+      "isBackground": true
+    },
+    {
+      "type": "npm",
+      "script": "dev",
+      "path": "english-mediator/",
+      "problemMatcher": [],
+      "label": "english",
+      "isBackground": true
+    }
+  ]
+}
