@@ -1,6 +1,7 @@
 "use strict";
 
 const properties = require("../../package.json");
+const { MediatorsAPI } = require("../api/mediators-api");
 const { browse, getStudentData } = require("../utils/mock/browse-mock");
 const {
   PROGRESS_CATEGORIES,
@@ -11,6 +12,7 @@ const {
   getAllProcessors,
 } = require("../utils/mock/processors-mock");
 const { generateStudentsData } = require("../utils/mock/students-data-mock");
+const { MediatorController } = require("./mediators-controller");
 
 var controllers = {
   about: (req, res) => {
@@ -20,51 +22,38 @@ var controllers = {
     };
     res.json(aboutInfo);
   },
-  getProgressCategories(req, res) {
-    res.json(PROGRESS_CATEGORIES);
+  login: (req, res) => {
+    const { username, password } = req.body;
+    if (username === "admin" && password === "hadouken") {
+      res.json({
+        success: true,
+        message: "Login successful",
+        token: Math.random().toString(36).substring(2, 15),
+      });
+    } else {
+      res.json({
+        success: false,
+        message: "Login failed",
+      });
+    }
   },
   getStudentYears(req, res) {
     var limit = req.query.limit || 100;
     const studentYears = STUDENT_YEARS.slice(0, limit);
     res.json(studentYears);
   },
-  getStudentsData(req, res) {
-    var data = [];
-    var studentYearId = req.params.studentYearId;
-    for (const category of PROGRESS_CATEGORIES) {
-      data.push(generateStudentsData(category.id, studentYearId));
+  getProgressCategories: MediatorController.getProgressCategories,
+  getStudentDistributions: MediatorController.getStudentDistributions,
+  getStudents: MediatorController.getStudents,
+  getStudent: MediatorController.getStudent,
+  getProcessors: MediatorController.getProcessors,
+  async test(req, res) {
+    try {
+      const response = await MediatorsAPI.getMetadata(req.query.mediator);
+      res.json(response.data);
+    } catch (error) {
+      res.status(500).json({ message: "Could not connect to mediator" });
     }
-    res.json(data);
-  },
-  getBrowseStudents(req, res) {
-    var progressCategoryId = req.params.progressCategoryId;
-    var studentYearId = req.query.studentYearId;
-    var statusId = req.query.statusId;
-    var studentId = req.query.studentId;
-    var studentName = req.query.studentName;
-    var page = req.query.page;
-    var size = req.query.size;
-    var data = browse({
-      progressCategoryId,
-      studentYearId,
-      statusId,
-      studentId,
-      studentName,
-      page,
-      size,
-    });
-    res.json(data);
-  },
-  getStudentData(req, res) {
-    var studentId = req.params.studentId;
-    var progressCategoryId = req.query.progressCategoryId;
-    var student = getStudentData(studentId, progressCategoryId);
-    res.json(student);
-  },
-  getProcessors(req, res) {
-    var progressCategoryId = req.params.progressCategoryId;
-    if (progressCategoryId === "all") res.json(getAllProcessors());
-    else res.json(getProcessorsByProgressCategory(progressCategoryId));
   },
 };
 
