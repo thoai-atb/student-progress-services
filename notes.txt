@@ -26,6 +26,12 @@ MICROSERVICES - PORTS
     General Mediator: 8091
     Semester Mediator: 8092
     English Mediator: 8093
+    API Gateway: 8094
+    Course Service: 8095
+    Lecturer: 8096
+    Payment: 8097
+    Exam: 8098
+    
 
 
 DESCRIBE A TOPIC:
