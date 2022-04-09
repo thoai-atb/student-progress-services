@@ -1,9 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const port = process.env.PORT || 8091;
+const port = process.env.PORT || 8098;
 const routes = require("./src/routes/routes");
-const { startMediator } = require("./src/kafka/mediator");
 
 app.use(
   cors({
@@ -19,5 +18,3 @@ routes(app);
 app.listen(port, function () {
   console.log("Server started on port: " + port);
 });
-
-startMediator();

@@ -9,6 +9,14 @@ const server = gateway({
       prefix: "/lecturer",
       target: "http://localhost:8096",
     },
+    {
+      prefix: "/certification",
+      target: "http://localhost:8097",
+    },
+    {
+      prefix: "/iuoss",
+      target: "http://localhost:8098",
+    },
   ],
 });
 

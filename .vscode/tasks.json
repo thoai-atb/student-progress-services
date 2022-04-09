@@ -9,8 +9,8 @@
         "semester",
         "english",
         "gateway",
-        "course",
-        "lecturer"
+        "certification",
+        "iuoss"
       ],
       "problemMatcher": []
     },
@@ -68,6 +68,22 @@
       "path": "lecturer-service/",
       "problemMatcher": [],
       "label": "lecturer",
+      "isBackground": true
+    },
+    {
+      "type": "npm",
+      "script": "dev",
+      "path": "certification-service/",
+      "problemMatcher": [],
+      "label": "certification",
+      "isBackground": true
+    },
+    {
+      "type": "npm",
+      "script": "dev",
+      "path": "iuoss-service/",
+      "problemMatcher": [],
+      "label": "iuoss",
       "isBackground": true
     }
   ]

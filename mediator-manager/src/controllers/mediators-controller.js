@@ -7,28 +7,31 @@ const CONNECT_ERROR_MESSAGE = "Could not connect to mediator";
 const MediatorController = {
   async getProgressCategories(req, res) {
     const data = [];
-    try {
-      for (const mediatorId of MEDIATOR_LIST) {
+    for (const mediatorId of MEDIATOR_LIST) {
+      try {
         const res2 = await MediatorsAPI.getMetadata(mediatorId);
         data.push(res2.data);
+      } catch (error) {
+        console.log(CONNECT_ERROR_MESSAGE, mediatorId);
       }
-      res.json(data);
-    } catch (error) {
-      res.status(500).json({ message: CONNECT_ERROR_MESSAGE });
     }
+    res.json(data);
   },
   async getStudentDistributions(req, res) {
     const data = [];
     const studentYear = req.params.studentYear;
-    try {
-      for (const mediatorId of MEDIATOR_LIST) {
-        const res2 = await MediatorsAPI.getDistribution(mediatorId, studentYear);
+    for (const mediatorId of MEDIATOR_LIST) {
+      try {
+        const res2 = await MediatorsAPI.getDistribution(
+          mediatorId,
+          studentYear
+        );
         data.push(res2.data);
+      } catch (error) {
+        console.log(CONNECT_ERROR_MESSAGE, mediatorId);
       }
-      res.json(data);
-    } catch (error) {
-      res.status(500).json({ message: CONNECT_ERROR_MESSAGE });
     }
+    res.json(data);
   },
   async getStudents(req, res) {
     const progressCategoryId = req.params.progressCategory;

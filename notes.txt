@@ -28,9 +28,11 @@ MICROSERVICES - PORTS
     English Mediator: 8093
     API Gateway: 8094
     Course Service: 8095
-    Lecturer: 8096
-    Payment: 8097
-    Exam: 8098
+    Lecturer Service: 8096
+    Certification Service: 8097
+    IUOSS Service: 8098
+
+
     
 
 
