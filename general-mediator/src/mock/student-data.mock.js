@@ -19,7 +19,7 @@ const generateStepData = (stepId, stepName, status) => {
     return items.map((item) => ({
       label: item,
       status: itemStatus,
-      description: "Description",
+      description: status === STEP_STATUS.DONE ? "Done" : "",
     }));
   })();
   var progress = (() => {
@@ -30,11 +30,16 @@ const generateStepData = (stepId, stepName, status) => {
         100
     );
   })();
+  var statusName = (() => {
+    if (stepId === STEPS.FINISHED || stepId === STEPS.DROPPED)
+      return "No status";
+    return snakeToTitleCase(status);
+  })();
   return {
     id: stepId,
     name: stepName,
     status,
-    statusName: snakeToTitleCase(status),
+    statusName,
     progress: progress,
     items: items,
   };
@@ -66,7 +71,6 @@ const generateProgressStatus = () => {
 };
 
 const generateStudents = () => {
-  console.log("Generating students...");
   const students = [];
   const year = 17;
   const studentPerYear = 20;
