@@ -11,9 +11,9 @@ const createAxios = (url) => {
   });
 };
 
-const generalMediatorAxios = createAxios("http://localhost:8091");
-const semesterMediatorAxios = createAxios("http://localhost:8092");
-const englishMediatorAxios = createAxios("http://localhost:8093");
+const generalMediatorAxios = createAxios("http://localhost:8094/general-mediator");
+const semesterMediatorAxios = createAxios("http://localhost:8094/semester-mediator");
+const englishMediatorAxios = createAxios("http://localhost:8094/english-mediator");
 
 const MEDIATOR_LIST = [
   "general", // general mediator

@@ -1,33 +1,33 @@
 const PROCESSORS_MOCK = [
   {
-    id: "general_mediator",
+    id: "general-mediator",
     name: "General Mediator",
     isMediator: true,
     processors: 4,
     problems: 0,
   },
   {
-    id: "semester_mediator",
+    id: "semester-mediator",
     name: "Semester Mediator",
     isMediator: true,
     processors: 4,
     problems: 0,
   },
   {
-    id: "english_mediator",
+    id: "english-mediator",
     name: "English Mediator",
     isMediator: true,
     processors: 4,
     problems: 0,
   },
   {
-    id: "student_services",
+    id: "student-services",
     name: "Student Services",
     processors: 2,
     problems: 0,
   },
   {
-    id: "payment_services",
+    id: "payment-services",
     name: "Payment Services",
     processors: 2,
     problems: 0,

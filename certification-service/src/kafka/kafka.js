@@ -25,6 +25,7 @@ async function createConsumer(topic) {
 
 module.exports = {
   producer,
+  kafka,
   createConsumer,
   TOPICS,
 };

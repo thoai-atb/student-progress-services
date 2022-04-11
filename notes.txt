@@ -31,6 +31,8 @@ MICROSERVICES - PORTS
     Lecturer Service: 8096
     Certification Service: 8097
     IUOSS Service: 8098
+    Service Manager: 8099
+    Course Service 2: 8100
 
 
     

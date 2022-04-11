@@ -19,7 +19,8 @@ const STEP_ITEMS = {
     "AE 2",
   ],
   [STEPS.ACQUIRING_CREDITS]: [
-    "Credits Studied",
+    "Compulsory Courses",
+    "Elective Courses",
   ],
   [STEPS.THESIS]: [
     "Course Registration",

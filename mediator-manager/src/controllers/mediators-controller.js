@@ -1,4 +1,5 @@
 const { MEDIATOR_LIST, MediatorsAPI } = require("../api/mediators-api");
+const { ServicesAPI } = require("../api/services-api");
 const { PROCESSORS_MOCK } = require("../utils/mock/processors-mock");
 const { mapper } = require("./progress-to-mediator-mapper");
 
@@ -76,13 +77,20 @@ const MediatorController = {
   async getProcessors(req, res) {
     var progressCategoryId = req.params.progressCategory;
     var data = [];
+    var serviceGroups = [];
     try {
-      if (progressCategoryId === "all") data = PROCESSORS_MOCK;
+      const res2 = await ServicesAPI.getServiceGroups();
+      serviceGroups = res2.data;
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+    try {
+      if (progressCategoryId === "all") data = serviceGroups;
       else {
         const mediatorId = mapper(progressCategoryId);
         const res2 = await MediatorsAPI.getProcessors(mediatorId);
         const list = res2.data;
-        data = PROCESSORS_MOCK.filter((processor) =>
+        data = serviceGroups.filter((processor) =>
           list.includes(processor.id)
         );
       }

@@ -3,6 +3,7 @@ const cors = require("cors");
 const app = express();
 const port = process.env.PORT || 8093;
 const routes = require("./src/routes/routes");
+const { registerService } = require("./src/kafka/service-registry");
 
 app.use(
   cors({
@@ -18,3 +19,5 @@ routes(app);
 app.listen(port, function () {
   console.log("Server started on port: " + port);
 });
+
+registerService();

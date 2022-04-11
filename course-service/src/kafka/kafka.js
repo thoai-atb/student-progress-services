@@ -14,6 +14,7 @@ const kafka = new Kafka({
 const producer = kafka.producer();
 
 module.exports = {
+  kafka,
   producer,
   TOPICS,
 };

@@ -1,12 +1,12 @@
 const PROCESSOR_IDS = [
-  "general_mediator",
-  "student_services",
-  "certification_services",
-  "mail_services",
-  "blackboard_services",
-  "edusoft_services",
-  "military_services",
-  "payment_services",
+  "general-mediator",
+  "student-service",
+  "certification-service",
+  "mail-service",
+  "blackboard-service",
+  "edusoft-service",
+  "iuoss-service",
+  "payment-service",
 ];
 
 module.exports = { PROCESSOR_IDS };

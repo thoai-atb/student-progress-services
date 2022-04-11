@@ -4,6 +4,7 @@ const app = express();
 const port = process.env.PORT || 8092;
 const routes = require("./src/routes/routes");
 const { startMediator } = require("./src/kafka/mediator");
+const { registerService } = require("./src/kafka/service-registry");
 
 app.use(
   cors({
@@ -21,3 +22,4 @@ app.listen(port, function () {
 });
 
 startMediator();
+registerService();

@@ -17,6 +17,7 @@ const consumer = kafka.consumer({ groupId: ID });
 
 module.exports = {
   TOPICS,
+  kafka,
   producer,
   consumer,
 };

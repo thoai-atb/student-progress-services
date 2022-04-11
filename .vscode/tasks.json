@@ -4,13 +4,16 @@
     {
       "label": "start all",
       "dependsOn": [
-        "manager",
-        "general",
-        "semester",
-        "english",
+        "mediator-manager",
+        "general-mediator",
+        "semester-mediator",
+        "english-mediator",
         "gateway",
         "certification",
-        "iuoss"
+        "iuoss",
+        "service-manager",
+        "course",
+        "lecturer",
       ],
       "problemMatcher": []
     },
@@ -19,7 +22,7 @@
       "script": "dev",
       "path": "mediator-manager/",
       "problemMatcher": [],
-      "label": "manager",
+      "label": "mediator-manager",
       "isBackground": true
     },
     {
@@ -27,7 +30,7 @@
       "script": "dev",
       "path": "general-mediator/",
       "problemMatcher": [],
-      "label": "general",
+      "label": "general-mediator",
       "isBackground": true
     },
     {
@@ -35,7 +38,7 @@
       "script": "dev",
       "path": "semester-mediator/",
       "problemMatcher": [],
-      "label": "semester",
+      "label": "semester-mediator",
       "isBackground": true
     },
     {
@@ -43,7 +46,7 @@
       "script": "dev",
       "path": "english-mediator/",
       "problemMatcher": [],
-      "label": "english",
+      "label": "english-mediator",
       "isBackground": true
     },
     {
@@ -84,6 +87,14 @@
       "path": "iuoss-service/",
       "problemMatcher": [],
       "label": "iuoss",
+      "isBackground": true
+    },
+    {
+      "type": "npm",
+      "script": "dev",
+      "path": "service-manager/",
+      "problemMatcher": [],
+      "label": "service-manager",
       "isBackground": true
     }
   ]

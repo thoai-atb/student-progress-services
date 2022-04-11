@@ -4,6 +4,7 @@ const app = express();
 const port = process.env.PORT || 8096;
 const routes = require("./src/routes/routes");
 const { listenCourseRegistered } = require("./src/kafka/course-registered-listener");
+const { registerService } = require("./src/kafka/service-registry");
 
 app.use(
   cors({
@@ -21,3 +22,4 @@ app.listen(port, function () {
 });
 
 listenCourseRegistered();
+registerService();

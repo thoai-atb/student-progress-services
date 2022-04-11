@@ -1,15 +1,15 @@
 const PROCESSOR_IDS = [
-  "semester_mediator",
-  "student_services",
-  "payment_services",
-  "course_services",
-  "examination_services",
-  "advisor_services",
-  "mail_services",
-  "academic_schedule_services",
-  "retention_services",
-  "blackboard_services",
-  "edusoft_services",
+  "semester-mediator",
+  "student-service",
+  "payment-service",
+  "course-service",
+  "examination-service",
+  "lecturer-service",
+  "mail-service",
+  "academic-schedule-service",
+  "retention-service",
+  "blackboard-service",
+  "edusoft-service",
 ];
 
 module.exports = { PROCESSOR_IDS };
