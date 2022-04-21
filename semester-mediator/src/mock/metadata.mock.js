@@ -18,13 +18,13 @@ const METADATA = {
     {
       id: STEPS.REGISTRATION,
       name: "Registration",
-      description: "Students have not registered for courses in this semester.",
+      description: "Students registrating for courses in this semester.",
     },
     {
-      id: STEPS.CONFIRMATION,
-      name: "Confirmation",
+      id: STEPS.ADD_DROP,
+      name: "Add Drop",
       description:
-        "Students registered for courses in this semester and waiting for their course registration accepted.",
+        "Students have a chance to add or drop courses in this semester.",
     },
     {
       id: STEPS.PAYMENT,

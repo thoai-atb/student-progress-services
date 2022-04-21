@@ -7,8 +7,6 @@ const TOPICS = {
   SERVICE_BROADCAST: "service-broadcast",
 };
 
-const serviceGroupId = "course-service";
-
 async function registerService(port) {
   const producer = kafka.producer();
   await producer.connect();
@@ -39,8 +37,8 @@ async function fireServiceOn(producer, port) {
     messages: [
       {
         value: JSON.stringify({
-          id: properties.name + " " + properties.version,
-          serviceGroupId: serviceGroupId,
+          serviceId: properties.name + " " + properties.version,
+          serviceGroupId: properties.name,
           version: properties.version,
           port: port,
         }),
@@ -57,8 +55,8 @@ async function fireError(error) {
     messages: [
       {
         value: JSON.stringify({
-          id: properties.name + " " + properties.version,
-          serviceGroupId: serviceGroupId,
+          serviceId: properties.name + " " + properties.version,
+          serviceGroupId: properties.name,
           error: error,
           time: new Date(),
         }),

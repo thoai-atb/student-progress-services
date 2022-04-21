@@ -30,30 +30,27 @@ const SERVICE_GROUPS = [
     name: "Payment Services",
     description: "Payment services for managing payments in the university",
   },
-  {
-    id: "course-service",
-    name: "Course Services",
-    description: "Course services for managing courses in the university",
-  },
+  // {
+  //   id: "course-service",
+  //   name: "Course Services",
+  //   description: "Course services for managing courses in the university",
+  // },
   {
     id: "examination-service",
     name: "Examination Services",
-    description: "Examination services for managing examinations in the university",
+    description:
+      "Examination services for managing examinations in the university",
   },
   {
     id: "certification-service",
     name: "Certification Services",
-    description: "Certification services for managing certifications in the university",
+    description:
+      "Certification services for managing certifications in the university",
   },
   {
     id: "lecturer-service",
     name: "Lecturer Services",
     description: "Lecturer services for managing lecturers in the university",
-  },
-  {
-    id: "mail-service",
-    name: "Mail Services",
-    description: "Mail services for managing mails in the university",
   },
   {
     id: "academic-schedule-service",
@@ -68,7 +65,8 @@ const SERVICE_GROUPS = [
   {
     id: "blackboard-service",
     name: "Blackboard Services",
-    description: "Blackboard services for managing blackboard in the university",
+    description:
+      "Blackboard services for managing blackboard in the university",
   },
   {
     id: "edusoft-service",
@@ -79,6 +77,11 @@ const SERVICE_GROUPS = [
     id: "iuoss-service",
     name: "IUOSS Services",
     description: "IUOSS services for managing IUOSS in the university",
+  },
+  {
+    id: "mail-service",
+    name: "Mail Services",
+    description: "Mail services for managing mails in the university",
   },
 ];
 

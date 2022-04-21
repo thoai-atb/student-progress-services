@@ -16,21 +16,31 @@ var controllers = {
   getServiceGroups: (req, res) => {
     res.json(ServicesService.getServiceGroups());
   },
+  addServiceGroup: (req, res) => {
+    ServicesService.addServiceGroup(req.body);
+    res.json({
+      message: "Service group added",
+      payload: req.body,
+    });
+  },
   getProblems: (req, res) => {
     res.json(ServicesService.getProblems());
+  },
+  resolveProblem: (req, res) => {
+    res.json(ServicesService.resolveError(req.params.errorId));
   },
   refreshServices: (req, res) => {
     ServicesService.refreshServices();
     res.json({
-      message: "Refreshing services",
+      message: "Refreshed services",
     });
   },
   refreshServicesSoft: (req, res) => {
     ServicesService.refreshServicesSoft();
     res.json({
-      message: "Refreshing services soft",
+      message: "Refreshed services soft",
     });
-  }
+  },
 };
 
 module.exports = controllers;

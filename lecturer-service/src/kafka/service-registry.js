@@ -37,7 +37,7 @@ async function fireServiceOn(producer, port) {
     messages: [
       {
         value: JSON.stringify({
-          id: properties.name + " " + properties.version,
+          serviceId: properties.name + " " + properties.version,
           serviceGroupId: properties.name,
           version: properties.version,
           port: port,
@@ -47,7 +47,27 @@ async function fireServiceOn(producer, port) {
   });
 }
 
+async function fireError(error) {
+  const producer = kafka.producer();
+  await producer.connect();
+  await producer.send({
+    topic: TOPICS.SERVICE_ERROR,
+    messages: [
+      {
+        value: JSON.stringify({
+          serviceId: properties.name + " " + properties.version,
+          serviceGroupId: properties.name,
+          error: error,
+          time: new Date(),
+        }),
+      },
+    ],
+  });
+  await producer.disconnect();
+}
+
 module.exports = {
   TOPICS,
   registerService,
+  fireError,
 };

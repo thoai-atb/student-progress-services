@@ -4,6 +4,7 @@ const app = express();
 const port = process.env.PORT || 8099;
 const routes = require("./src/routes/routes");
 const { listenToServices } = require("./src/kafka/service-listener");
+const { ServicesService } = require("./src/services/service");
 
 app.use(
   cors({
@@ -21,3 +22,7 @@ app.listen(port, function () {
 });
 
 listenToServices();
+
+new Promise((resolve) => setTimeout(resolve, 3000)).then(() => {
+  ServicesService.refreshServices();
+});

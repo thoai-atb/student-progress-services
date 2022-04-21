@@ -39,6 +39,6 @@ MICROSERVICES - PORTS
 
 
 DESCRIBE A TOPIC:
-  ./kafka-topics.sh  --describe --bootstrap-server localhost:9092 --topic TO_EMAIL_STUDENT
+  ~/kafka/bin/kafka-topics.sh  --describe --bootstrap-server localhost:9092 --topic service-on
 CHANGE PARTITIONS OF A TOPIC:
-  ./kafka-topics.sh --bootstrap-server localhost:9092 --alter --topic TO_EMAIL_STUDENT --partitions 6
+  ~/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --alter --topic TO_EMAIL_STUDENT --partitions 6

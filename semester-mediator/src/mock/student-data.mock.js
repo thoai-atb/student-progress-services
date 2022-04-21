@@ -1,5 +1,6 @@
 const { snakeToTitleCase } = require("../utils/case-converter");
 const { STEPS, METADATA } = require("./metadata.mock");
+const { STEP_ITEMS } = require("./step-items.mock");
 
 const STEP_STATUS = {
   DONE: "done",
@@ -8,11 +9,39 @@ const STEP_STATUS = {
 };
 
 const generateStepData = (stepId, stepName, status) => {
+  var items = (() => {
+    if (stepId === STEPS.FINISHED || stepId === STEPS.DROPPED) return undefined;
+    const itemStatus = (() => {
+      if (status === STEP_STATUS.DONE) return "done";
+      return "not done";
+    })();
+    const items = STEP_ITEMS[stepId] || [];
+    return items.map((item) => ({
+      label: item,
+      status: itemStatus,
+      description: status === STEP_STATUS.DONE ? "Done" : "",
+    }));
+  })();
+  var progress = (() => {
+    if (stepId === STEPS.FINISHED || stepId === STEPS.DROPPED) return undefined;
+    if (items.length === 0) return undefined;
+    return Math.round(
+      (items.filter((item) => item.status === "done").length / items.length) *
+        100
+    );
+  })();
+  var statusName = (() => {
+    if (stepId === STEPS.FINISHED || stepId === STEPS.DROPPED)
+      return "No status";
+    return snakeToTitleCase(status);
+  })();
   return {
     id: stepId,
     name: stepName,
     status,
-    statusName: snakeToTitleCase(status),
+    statusName,
+    progress: progress,
+    items: items,
   };
 };
 
@@ -67,4 +96,4 @@ const generateStudents = () => {
 
 const STUDENTS = generateStudents();
 
-module.exports = { STUDENTS };
+module.exports = { STUDENTS, STEP_STATUS };

@@ -4,15 +4,15 @@
     {
       "label": "start all",
       "dependsOn": [
+        "gateway",
+        "service-manager",
         "mediator-manager",
         "general-mediator",
         "semester-mediator",
         "english-mediator",
-        "gateway",
         "certification",
         "iuoss",
-        "service-manager",
-        "course",
+        // "course",
         "lecturer",
       ],
       "problemMatcher": []
