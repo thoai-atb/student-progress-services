@@ -23,6 +23,6 @@ app.listen(port, function () {
 
 listenToServices();
 
-new Promise((resolve) => setTimeout(resolve, 3000)).then(() => {
+new Promise((resolve) => setTimeout(resolve, 5000)).then(() => {
   ServicesService.refreshServices();
 });

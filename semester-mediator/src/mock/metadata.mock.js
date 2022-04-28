@@ -1,6 +1,6 @@
 const STEPS = {
   REGISTRATION: "registration",
-  CONFIRMATION: "confirmation",
+  ADD_DROP: "add_drop",
   PAYMENT: "payment",
   MIDTERM: "midterm",
   FINAL: "final",

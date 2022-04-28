@@ -26,12 +26,12 @@ const ErrorHandlingService = {
   ) {
     const studentId = eventMessage?.studentId;
     if (!studentId) return false;
-    const upperCaseId = studentId.toUpperCase();
-    if (studentId === upperCaseId) return false;
+    const fixedStudentId = studentId.toUpperCase().replace(/[-_ ]/g, "");
+    if (studentId === fixedStudentId) return false;
     console.log(
-      `Handling error: Changing student ID from ${studentId} to ${upperCaseId}`
+      `Handling error: Changing student ID from ${studentId} to ${fixedStudentId}`
     );
-    eventMessage.studentId = upperCaseId;
+    eventMessage.studentId = fixedStudentId;
     await producer.connect();
     await producer.send({
       topic: eventTopic,
