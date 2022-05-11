@@ -1,15 +1,24 @@
 const { MediatorService } = require("../services/service");
-const { producer, TOPICS, createConsumer } = require("./kafka");
+const { producer, TOPICS, consumer } = require("./kafka");
 const { fireError } = require("./service-registry");
 
 async function startMediator() {
-  const consumer = await createConsumer(TOPICS.COURSE_REGISTERED);
+  await consumer.connect();
+  consumer.subscribe({ topic: TOPICS.COURSE_REGISTERED });
+  consumer.subscribe({ topic: TOPICS.REGISTRATION_CONFIRMED });
   consumer.run({
     eachMessage: async ({ topic, partition, message }) => {
       const data = JSON.parse(message.value);
       console.log("NEW MESSAGE: ", topic);
       console.log(data);
-      await onCourseRegistered(data);
+      switch (topic) {
+        case TOPICS.COURSE_REGISTERED:
+          onCourseRegistered(data);
+          break;
+        case TOPICS.REGISTRATION_CONFIRMED:
+          onRegistrationConfirmed(data);
+          break;
+      }
     },
   });
 }
@@ -34,6 +43,21 @@ async function onCourseRegistered(data) {
       stack: error.stack,
       eventMessage: data,
       eventTopic: TOPICS.COURSE_REGISTERED,
+    });
+  }
+}
+
+async function onRegistrationConfirmed(data) {
+  const { studentId } = data;
+  try {
+    MediatorService.updateConfirmation(studentId, true, "Confirmed");
+  } catch (error) {
+    console.log(error);
+    fireError({
+      message: error.message,
+      stack: error.stack,
+      eventMessage: data,
+      eventTopic: TOPICS.REGISTRATION_CONFIRMED,
     });
   }
 }

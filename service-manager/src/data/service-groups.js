@@ -30,23 +30,23 @@ const SERVICE_GROUPS = [
     name: "Payment Services",
     description: "Payment services for managing payments in the university",
   },
-  // {
-  //   id: "course-service",
-  //   name: "Course Services",
-  //   description: "Course services for managing courses in the university",
-  // },
+  {
+    id: "course-service",
+    name: "Course Services",
+    description: "Course services for managing courses in the university",
+  },
   {
     id: "examination-service",
     name: "Examination Services",
     description:
       "Examination services for managing examinations in the university",
   },
-  {
-    id: "certification-service",
-    name: "Certification Services",
-    description:
-      "Certification services for managing certifications in the university",
-  },
+  // {
+  //   id: "certification-service",
+  //   name: "Certification Services",
+  //   description:
+  //     "Certification services for managing certifications in the university",
+  // },
   {
     id: "lecturer-service",
     name: "Lecturer Services",

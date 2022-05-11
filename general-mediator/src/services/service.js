@@ -20,7 +20,7 @@ const MediatorService = {
     if (itemsCompleted === itemsTotal) {
       step.status = STEP_STATUS.DONE;
       step.statusName = snakeToTitleCase(STEP_STATUS.DONE);
-      nextStep = progressData.find(step => step.id === STEPS.FINISHED);
+      const nextStep = progressData.find(step => step.id === STEPS.FINISHED);
       nextStep.status = STEP_STATUS.CURRENT;
       nextStep.statusName = "No status";
       progressStatus.step.id = STEPS.FINISHED;

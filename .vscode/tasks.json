@@ -10,9 +10,9 @@
         "general-mediator",
         "semester-mediator",
         "english-mediator",
-        "certification",
+        // "certification",
         "iuoss",
-        // "course",
+        "course",
         "lecturer",
       ],
       "problemMatcher": []

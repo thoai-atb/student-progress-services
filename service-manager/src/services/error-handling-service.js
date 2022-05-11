@@ -24,7 +24,7 @@ const ErrorHandlingService = {
     eventMessage,
     eventTopic
   ) {
-    const studentId = eventMessage?.studentId;
+    const studentId = eventMessage?.studentId?.toString();
     if (!studentId) return false;
     const fixedStudentId = studentId.toUpperCase().replace(/[-_ ]/g, "");
     if (studentId === fixedStudentId) return false;

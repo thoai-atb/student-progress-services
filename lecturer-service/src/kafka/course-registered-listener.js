@@ -1,3 +1,4 @@
+const { LecturerService } = require("../services/service");
 const { createConsumer, TOPICS, producer } = require("./kafka");
 
 const listenCourseRegistered = async () => {
@@ -8,6 +9,7 @@ const listenCourseRegistered = async () => {
       const toConfirm = JSON.parse(message.value);
       console.log("NEW MESSAGE: ", TOPICS.REGISTRATION_TO_CONFIRM);
       console.log(toConfirm);
+      LecturerService.addToConfirm(toConfirm);
     },
   });
 };
