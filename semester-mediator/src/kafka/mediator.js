@@ -1,6 +1,7 @@
 const { MediatorService } = require("../services/service");
 const { producer, TOPICS, consumer } = require("./kafka");
 const { fireError } = require("./service-registry");
+var startTestTime, numMessagesTest;
 
 async function startMediator() {
   await consumer.connect();
@@ -9,8 +10,10 @@ async function startMediator() {
   consumer.run({
     eachMessage: async ({ topic, partition, message }) => {
       const data = JSON.parse(message.value);
-      console.log("NEW MESSAGE: ", topic);
-      console.log(data);
+      if (!data.isTest) {
+        console.log("NEW MESSAGE: ", topic);
+        console.log(data);
+      }
       switch (topic) {
         case TOPICS.COURSE_REGISTERED:
           onCourseRegistered(data);
@@ -24,7 +27,24 @@ async function startMediator() {
 }
 
 async function onCourseRegistered(data) {
-  const { studentId, courseIds } = data;
+  const { studentId, courseIds, isTest } = data;
+
+  if (isTest) {
+    if (studentId.includes("START")) {
+      console.log("START TESTING...");
+      startTestTime = Date.now();
+      numMessagesTest = 0;
+    } 
+    numMessagesTest++;
+    // console.log("TEST REGISTRATION: " + studentId);
+    if (studentId.includes("END")) {
+      const endTestTime = Date.now();
+      const testTime = endTestTime - startTestTime;
+      console.log(`TEST ENDED, TOTAL TIME: ${testTime}ms, ${numMessagesTest} MESSAGES IN TOTAL`);
+    }
+    return;
+  }
+
   try {
     MediatorService.updateRegistration(studentId, true, courseIds.join(", "));
     await producer.connect();

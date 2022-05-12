@@ -42,11 +42,14 @@ const CourseService = {
       const registrations = [];
       for (let i = 0; i < numOfRegistrations; i++) {
         const randomId = Math.floor(Math.random() * 1000000);
-        const padI = `${(i).toString().padStart(3, "0")}`;
+        const padI = `${i.toString().padStart(3, "0")}`;
+        const signal =
+          i === 0 ? "START" : i === numOfRegistrations - 1 ? "END" : "IU";
         const payload = {
           registrationId: randomId,
-          studentId: `TEST${numOfRegistrations}IU${padI}`,
+          studentId: `TEST${numOfRegistrations}${signal}${padI}`,
           courseIds: [`Registration ${padI}`],
+          isTest: true,
         };
         registrations.push(payload);
       }
