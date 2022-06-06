@@ -7,6 +7,10 @@ const listenCourseRegistered = async () => {
   consumer.run({
     eachMessage: async ({ topic, partition, message }) => {
       const toConfirm = JSON.parse(message.value);
+      if (toConfirm.isTest) {
+        console.log("Latency test: message received at time: ", new Date().getTime());
+        return;
+      }
       console.log("NEW MESSAGE: ", TOPICS.REGISTRATION_TO_CONFIRM);
       console.log(toConfirm);
       LecturerService.addToConfirm(toConfirm);

@@ -34,13 +34,27 @@ async function onCourseRegistered(data) {
       console.log("START TESTING...");
       startTestTime = Date.now();
       numMessagesTest = 0;
-    } 
+    }
     numMessagesTest++;
     // console.log("TEST REGISTRATION: " + studentId);
     if (studentId.includes("END")) {
       const endTestTime = Date.now();
       const testTime = endTestTime - startTestTime;
-      console.log(`TEST ENDED, TOTAL TIME: ${testTime}ms, ${numMessagesTest} MESSAGES IN TOTAL`);
+      console.log(
+        `TEST ENDED, TOTAL TIME: ${testTime}ms, ${numMessagesTest} MESSAGES IN TOTAL`
+      );
+    }
+    if (studentId.includes("LATEN")) {
+      await producer.connect();
+      await producer.send({
+        topic: TOPICS.REGISTRATION_TO_CONFIRM,
+        messages: [
+          {
+            value: JSON.stringify(data),
+          },
+        ],
+      });
+      console.log("LATENCY TEST: message produced at time:", new Date().getTime());
     }
     return;
   }

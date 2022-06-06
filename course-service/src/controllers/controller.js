@@ -18,10 +18,18 @@ var controllers = {
   },
   registerTest: async (req, res) => {
     const { numOfRegistrations } = req.body;
-    CourseService.registerTest(numOfRegistrations);
+    const batches = await CourseService.registerTest(numOfRegistrations);
     res.json({
       message:
         "Testing performance with " + numOfRegistrations + " registrations",
+      totalBatches: batches.length,
+    });
+  },
+  registerLatencyTest: async (req, res) => {
+    const { direct } = req.body;
+    await CourseService.registerLatencyTest(direct);
+    res.json({
+      message: "Testing latency, direct: " + direct,
     });
   },
 };

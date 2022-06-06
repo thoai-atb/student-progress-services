@@ -2,6 +2,7 @@ const { Kafka } = require("kafkajs");
 
 const TOPICS = {
   COURSE_REGISTERED: "course-registered",
+  REGISTRATION_TO_CONFIRM: "registration-to-confirm",
 };
 
 const ID = "course-service";

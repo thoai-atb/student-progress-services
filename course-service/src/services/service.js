@@ -39,7 +39,9 @@ const CourseService = {
       " registrations"
     );
     try {
-      const registrations = [];
+      var registrations = [];
+      const batches = [];
+      const batchSize = 1000;
       for (let i = 0; i < numOfRegistrations; i++) {
         const randomId = Math.floor(Math.random() * 1000000);
         const padI = `${i.toString().padStart(3, "0")}`;
@@ -52,16 +54,23 @@ const CourseService = {
           isTest: true,
         };
         registrations.push(payload);
+        if (registrations.length === batchSize) {
+          batches.push(registrations);
+          registrations = [];
+        }
       }
+      if (registrations.length > 0) batches.push(registrations);
       await producer.connect();
-      await producer.send({
-        topic: TOPICS.COURSE_REGISTERED,
-        messages: registrations.map((registration) => ({
-          value: JSON.stringify(registration),
-        })),
-      });
-      console.log("Testing ended");
-      return registrations;
+      for (const batch of batches) {
+        await producer.send({
+          topic: TOPICS.COURSE_REGISTERED,
+          messages: batch.map((registration) => ({
+            value: JSON.stringify(registration),
+          })),
+        });
+      }
+      console.log("Testing ended, total batches: ", batches.length);
+      return batches;
     } catch (error) {
       console.log(error);
       fireError({
@@ -70,6 +79,27 @@ const CourseService = {
       });
       return null;
     }
+  },
+
+  registerLatencyTest: async (direct) => {
+    const randomId = Math.floor(Math.random() * 1000000);
+    const padI = `${(0).toString().padStart(3, "0")}`;
+    const signal = "LATEN";
+    const payload = {
+      registrationId: randomId,
+      studentId: `TEST${000}${signal}${padI}`,
+      courseIds: [`Registration ${padI}`],
+      isTest: true,
+    };
+    const topic = direct
+      ? TOPICS.REGISTRATION_TO_CONFIRM
+      : TOPICS.COURSE_REGISTERED;
+    await producer.connect();
+    await producer.send({
+      topic: topic,
+      messages: [{ value: JSON.stringify(payload) }],
+    });
+    console.log("Register latency: message produced at time: ", new Date().getTime());
   },
 };
 
